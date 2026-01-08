@@ -1,0 +1,4 @@
+function openDetailsModal(title,obj){const t=document.querySelector("#detailsModalLabel"); const pre=document.querySelector("#detailsJson"); t.textContent=title; pre.textContent=JSON.stringify(obj,null,2); const modal=new bootstrap.Modal(document.querySelector("#detailsModal")); modal.show();}
+function copyDetailsJson(){const pre=document.querySelector("#detailsJson"); if(!pre) return; navigator.clipboard.writeText(pre.textContent||"").then(()=>{const btn=document.querySelector("#copyBtn"); if(btn){const old=btn.textContent; btn.textContent="Copied!"; setTimeout(()=>btn.textContent=old,1200);}});}
+function setUpdatedTime(){const el=document.querySelector("#lastUpdated"); if(el) el.textContent=new Date().toLocaleString();}
+document.addEventListener("DOMContentLoaded",()=>{document.querySelector("#copyBtn")?.addEventListener("click",copyDetailsJson);});

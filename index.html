@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Dashboard | Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <aside class="sidebar position-fixed top-0 start-0 bg-dark text-white p-3">
+    <div class="fw-bold">Meter Admin</div>
+    <div class="small text-white-50 mb-3">Bootstrap dashboard</div>
+    <div class="small text-white-50 mb-2">Navigation</div>
+    <nav class="nav nav-pills flex-column gap-1"><a class="nav-link py-2 active" href="index.html"><span class="me-2">•</span>Dashboard</a><a class="nav-link py-2" href="meters.html"><span class="me-2">•</span>Meters</a><a class="nav-link py-2" href="transactions.html"><span class="me-2">•</span>Transactions</a><a class="nav-link py-2" href="tokens.html"><span class="me-2">•</span>Tokens</a></nav>
+    <hr class="border-secondary my-3">
+    <div class="small text-white-50">Last refreshed</div>
+    <div class="small" id="lastUpdated">—</div>
+    <div class="mt-3 small text-white-50">API base: <span class="text-mono">http://51.21.71.194:3050/api</span></div>
+  </aside>
+
+  <div class="main">
+    <nav class="navbar navbar-light bg-white border-bottom sticky-top">
+      <div class="container-fluid">
+        <div>
+          <div class="h5 mb-0">Dashboard</div>
+          <div class="small text-muted">KPIs + quick tables</div>
+        </div>
+      </div>
+    </nav>
+    <main class="container-fluid p-4">
+<div class="row g-3">
+  <div class="col-12 col-lg-4"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Meters</div><div class="display-6 mb-0" id="kpiMeters">—</div>
+    <div class="small text-muted mt-2">Registered: <span id="kpiMetersRegistered">—</span></div>
+    <a href="meters.html" class="btn btn-sm btn-outline-primary mt-3">View meters</a>
+  </div></div></div>
+  <div class="col-12 col-lg-4"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Transactions</div><div class="display-6 mb-0" id="kpiTx">—</div>
+    <div class="small text-muted mt-2">Pending: <span id="kpiTxPending">—</span></div>
+    <div class="small text-muted">Amount sum: <span id="kpiTxAmount">—</span></div>
+    <a href="transactions.html" class="btn btn-sm btn-outline-primary mt-3">View transactions</a>
+  </div></div></div>
+  <div class="col-12 col-lg-4"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Tokens</div><div class="display-6 mb-0" id="kpiTokens">—</div>
+    <div class="small text-muted mt-2">Units sum: <span id="kpiUnits">—</span></div>
+    <div class="small text-muted">Amount sum: <span id="kpiTokenAmount">—</span></div>
+    <a href="tokens.html" class="btn btn-sm btn-outline-primary mt-3">View tokens</a>
+  </div></div></div>
+
+  <div class="col-12"><div class="card shadow-sm"><div class="card-body">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+      <div><div class="h6 mb-0">Quick search (across all)</div><div class="small text-muted">Click a row for full JSON.</div></div>
+      <div class="d-flex gap-2">
+        <input id="globalSearch" class="form-control" style="min-width:260px" placeholder="Search..."/>
+        <button id="reloadAll" class="btn btn-primary">Reload</button>
+      </div>
+    </div>
+    <div id="status" class="mt-3"></div>
+    <hr>
+    <div class="row g-3">
+      <div class="col-12 col-lg-4"><div class="small text-muted mb-2">Meters (top 10)</div>
+        <div class="table-responsive"><table id="tMeters" class="table table-sm table-striped table-hover align-middle mb-0"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <div class="col-12 col-lg-4"><div class="small text-muted mb-2">Transactions (top 10)</div>
+        <div class="table-responsive"><table id="tTx" class="table table-sm table-striped table-hover align-middle mb-0"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <div class="col-12 col-lg-4"><div class="small text-muted mb-2">Tokens (top 10)</div>
+        <div class="table-responsive"><table id="tTokens" class="table table-sm table-striped table-hover align-middle mb-0"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+</main>
+  </div>
+
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <pre id="detailsJson" class="bg-light border rounded p-3 mb-0" style="white-space: pre-wrap;"></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" id="copyBtn" type="button">Copy JSON</button>
+          <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/app.js?v=4"></script>
+  <script src="assets/ui.js?v=4"></script>
+  <script src="assets/layout.js?v=4"></script>
+  <script src="assets/pages/index.js?v=4"></script>
+</body>
+</html>
