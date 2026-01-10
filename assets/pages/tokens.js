@@ -5,14 +5,14 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   const reloadBtn=document.getElementById("reload");
   const kpiCount=document.getElementById("kpiCount");
 
-  const columns=[{ key:"registered", label:"Date" },
-    { key:"meter_number", label:"Meter No" },
-    { key:"amount", label:"Amount" },
-    { key:"units", label:"Units" },
-    { key:"status", label:"Status", badge:true },
-    { key:"token_number", label:"Token Number", mono:true },
-    { key:"transaction_reference", label:"Transaction Ref", mono:true },
-    { key:"token_id", label:"Token ID", mono:true }];
+  const columns=[
+  { key:"registered", label:"Date" },
+  { key:"meter_number", label:"Meter No" },
+  { key:"amount", label:"Amount" },
+  { key:"units", label:"Units" },
+  { key:"status", label:"Status", badge:true },
+  { key:"token_number", label:"Token Number", mono:true }
+];
   const formatters = { registered:(v)=>fmtDate(v), amount:(v)=> (v==null? "" : Number(v).toLocaleString()), units:(v)=> (v==null? "" : Number(v).toLocaleString()) };
   let allRows=[];
 

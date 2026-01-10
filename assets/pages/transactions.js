@@ -5,14 +5,14 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   const reloadBtn=document.getElementById("reload");
   const kpiCount=document.getElementById("kpiCount");
 
-  const columns=[{ key:"registered", label:"Date" },
-    { key:"meter_number", label:"Meter No" },
-    { key:"amount", label:"Amount" },
-    { key:"payment_status", label:"Payment", badge:true },
-    { key:"token_status", label:"Token", badge:true },
-    { key:"payment_phone", label:"Pay Phone" },
-    { key:"whatsapp_reference", label:"WhatsApp Ref", mono:true },
-    { key:"transaction_id", label:"Transaction ID", mono:true }];
+  const columns=[
+  { key:"registered", label:"Date" },
+  { key:"meter_number", label:"Meter No" },
+  { key:"amount", label:"Amount" },
+  { key:"payment_status", label:"Payment", badge:true },
+  { key:"token_status", label:"Token", badge:true },
+  { key:"payment_phone", label:"Pay Phone" }
+];
   const formatters = { registered:(v)=>fmtDate(v), amount:(v)=> (v==null? "" : Number(v).toLocaleString()) };
   let allRows=[];
 

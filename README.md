@@ -1,18 +1,18 @@
-# Meter Admin Dashboard v3
+# Meter Admin Dashboard v7
 
-Updated to use your new API endpoints (HTTPS):
+Meters page actions now use the same UMEME endpoint:
 
-- https://fxapi.invict.site/api/meters
-- https://fxapi.invict.site/api/transactions
-- https://fxapi.invict.site/api/tokens
+- Edit meter:
+  - POST https://fxapi.invict.site/api/umeme
+  - payload: { api:100, code:104, data:{ meter_id, customer_name, address, phone_number, meter_type, meter_number } }
 
-Run:
-```bash
-cd meter_admin_dashboard_v3
-python3 -m http.server 8000
-```
+- Deactivate meter:
+  - POST https://fxapi.invict.site/api/umeme
+  - payload: { api:100, code:105, data:{ meter_id } }
 
-Open:
-- http://localhost:8000/index.html
+Responses expected:
+- {code:200, msg:"..."} success
+- {code:300, msg:"..."} warning/error
 
-If you still get CORS, the API server must allow your origin (http://localhost:8000) or you can run via a small proxy.
+
+Optimistic UI: Deactivate immediately marks the meter status as `deactivated` in the table, then refreshes in the background.
