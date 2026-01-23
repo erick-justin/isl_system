@@ -16,3 +16,10 @@ Responses expected:
 
 
 Optimistic UI: Deactivate immediately marks the meter status as `deactivated` in the table, then refreshes in the background.
+
+
+New meter actions:
+- Clear Tamper (code 107) -> displays returned token
+- Clear Credit (code 108) -> displays returned token
+
+- Vending Token (code 109): prompts for amount and shows returned token in modal.
